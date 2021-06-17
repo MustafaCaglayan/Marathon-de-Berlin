@@ -123,5 +123,14 @@ library(ggthemes)
     geom_point(aes(x,yî), color="red")
 }
 
-
+#TAUX DE RENOUVELLEMENT (après avoir mis les données au format alluvial)
+p=ggplot(alv, aes(y=freq, axis1=r_2008, axis2=r_2009, axis3=r_2010))+
+  geom_alluvium(aes(fill = r_2008), width = 1/12) +
+  geom_stratum(width = 1/12, fill="black", color = "grey") +
+  geom_label(stat = "stratum", aes(label = after_stat(stratum))) +
+  scale_x_discrete(limits = c("2008", "2009","2010"), expand = c(.05, .05)) +
+  scale_fill_brewer(type = "qual", palette = "Set1") +
+  ggtitle("Taux de renouvellement par rapport à 2008 jusqu'a 2010")
+p + theme_stata()
+rm(list=c("p","alv"))
 
